@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuisArtsApp", "HuisArtsApp\HuisArtsApp.csproj", "{50EECD19-F1FC-48B4-8FE2-279561F3A081}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuisartsDB", "HuisartsDB\HuisartsDB.csproj", "{F9DEBEE8-C46F-4CE1-A74D-A781E90B798E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50EECD19-F1FC-48B4-8FE2-279561F3A081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50EECD19-F1FC-48B4-8FE2-279561F3A081}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50EECD19-F1FC-48B4-8FE2-279561F3A081}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50EECD19-F1FC-48B4-8FE2-279561F3A081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DEBEE8-C46F-4CE1-A74D-A781E90B798E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DEBEE8-C46F-4CE1-A74D-A781E90B798E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DEBEE8-C46F-4CE1-A74D-A781E90B798E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DEBEE8-C46F-4CE1-A74D-A781E90B798E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2AC8BF9-C714-44F0-8020-010DD14A2AEE}
+	EndGlobalSection
+EndGlobal
