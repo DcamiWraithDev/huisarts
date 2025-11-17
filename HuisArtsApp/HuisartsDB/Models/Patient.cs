@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HuisartsDB.Models
 {
@@ -8,6 +9,7 @@ namespace HuisartsDB.Models
         public string FirstName { get; set; }
         public string NamePrefix { get; set; }
         public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string StreetName { get; set; }
         public int HouseNumber { get; set; }
         public string ZipCode { get; set; }
@@ -15,5 +17,6 @@ namespace HuisartsDB.Models
         public int PhoneNumber { get; set; }
         public int SecondaryPhoneNumber { get; set; }
         public ICollection<Note> Notes { get; set; }
+
     }
 }

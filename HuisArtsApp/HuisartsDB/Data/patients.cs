@@ -20,7 +20,7 @@ namespace HuisartsDB.Data
             {
                 conn.Open();
 
-                string query = "SELECT first_name, name_prefix, last_name FROM patients";
+                string query = "SELECT first_name, name_prefix, last_name, date_of_birth FROM patients";
 
                 using (var cmd = new MySqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -31,7 +31,8 @@ namespace HuisartsDB.Data
                         {
                             FirstName = reader.GetString(reader.GetOrdinal("first_name")),
                             NamePrefix = reader.IsDBNull(reader.GetOrdinal("name_prefix")) ? null : reader.GetString(reader.GetOrdinal("name_prefix")), // Handle possible NULL value
-                            LastName = reader.GetString(reader.GetOrdinal("last_name"))
+                            LastName = reader.GetString(reader.GetOrdinal("last_name")),
+                            DateOfBirth = reader.GetDateTime(reader.GetOrdinal("date_of_birth"))
                         });
                     }
 
@@ -39,6 +40,43 @@ namespace HuisartsDB.Data
             }
 
             return list;
+        }
+
+        public List<Patient> SearchPatients(string keyword)
+        {
+            var list = new List<Patient>();
+
+            using (var conn = DatabaseConnection.GetConnection())
+            {
+                conn.Open();
+
+                string query = @"SELECT first_name, name_prefix, last_name, date_of_birth
+                                 FROM patients
+                                 WHERE CONCAT_WS(' ', name_prefix, last_name) LIKE @search";
+
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@search", "%" + keyword + "%");
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new Patient
+                            {
+                                FirstName = reader.GetString("first_name"),
+                                NamePrefix = reader.IsDBNull(reader.GetOrdinal("name_prefix")) ? null : reader.GetString("name_prefix"),
+                                LastName = reader.GetString("last_name"), 
+                                DateOfBirth = reader.GetDateTime(reader.GetOrdinal("date_of_birth"))
+
+                            });
+                        }
+                    }
+                }
+            }
+
+            return list;
+
         }
     }
 }
