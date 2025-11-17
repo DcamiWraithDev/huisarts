@@ -20,7 +20,9 @@ namespace HuisartsDB.Data
             {
                 conn.Open();
 
-                string query = "SELECT first_name, name_prefix, last_name, date_of_birth FROM patients";
+                string query = @"SELECT patient_id, first_name, name_prefix, last_name, date_of_birth, street_name, house_number, zip_code, city, mobile_number, secondary_phone
+                                FROM patients";
+
 
                 using (var cmd = new MySqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -29,10 +31,17 @@ namespace HuisartsDB.Data
                     {
                         list.Add(new Patient
                         {
-                            FirstName = reader.GetString(reader.GetOrdinal("first_name")),
-                            NamePrefix = reader.IsDBNull(reader.GetOrdinal("name_prefix")) ? null : reader.GetString(reader.GetOrdinal("name_prefix")), // Handle possible NULL value
-                            LastName = reader.GetString(reader.GetOrdinal("last_name")),
-                            DateOfBirth = reader.GetDateTime(reader.GetOrdinal("date_of_birth"))
+                            PatientId = reader.GetInt32("patient_id"),
+                            FirstName = reader.GetString("first_name"),
+                            NamePrefix = reader.IsDBNull(reader.GetOrdinal("name_prefix")) ? null : reader.GetString("name_prefix"),
+                            LastName = reader.GetString("last_name"),
+                            DateOfBirth = reader.GetDateTime("date_of_birth"),
+                            StreetName = reader.GetString("street_name"),
+                            HouseNumber = reader.GetInt32("house_number"),
+                            ZipCode = reader.GetString("zip_code"),
+                            City = reader.GetString("city"),
+                            PhoneNumber = reader.GetString("mobile_number"),
+                            SecondaryPhoneNumber = reader.GetString("secondary_phone")
                         });
                     }
 
@@ -50,9 +59,10 @@ namespace HuisartsDB.Data
             {
                 conn.Open();
 
-                string query = @"SELECT first_name, name_prefix, last_name, date_of_birth
-                                 FROM patients
-                                 WHERE CONCAT_WS(' ', name_prefix, last_name) LIKE @search";
+                string query = @"SELECT patient_id, first_name, name_prefix, last_name, date_of_birth,
+                                street_name, house_number, zip_code, city, mobile_number, secondary_phone
+                         FROM patients
+                         WHERE CONCAT_WS(' ', first_name, name_prefix, last_name) LIKE @search";
 
                 using (var cmd = new MySqlCommand(query, conn))
                 {
@@ -64,11 +74,17 @@ namespace HuisartsDB.Data
                         {
                             list.Add(new Patient
                             {
+                                PatientId = reader.GetInt32("patient_id"),
                                 FirstName = reader.GetString("first_name"),
                                 NamePrefix = reader.IsDBNull(reader.GetOrdinal("name_prefix")) ? null : reader.GetString("name_prefix"),
-                                LastName = reader.GetString("last_name"), 
-                                DateOfBirth = reader.GetDateTime(reader.GetOrdinal("date_of_birth"))
-
+                                LastName = reader.GetString("last_name"),
+                                DateOfBirth = reader.GetDateTime("date_of_birth"),
+                                StreetName = reader.GetString("street_name"),
+                                HouseNumber = reader.GetInt32("house_number"),
+                                ZipCode = reader.GetString("zip_code"),
+                                City = reader.GetString("city"),
+                                PhoneNumber = reader.GetString("mobile_number"),
+                                SecondaryPhoneNumber = reader.GetString("secondary_phone")
                             });
                         }
                     }
@@ -76,7 +92,7 @@ namespace HuisartsDB.Data
             }
 
             return list;
-
         }
+
     }
 }

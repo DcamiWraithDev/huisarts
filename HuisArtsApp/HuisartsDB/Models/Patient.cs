@@ -14,8 +14,8 @@ namespace HuisartsDB.Models
         public int HouseNumber { get; set; }
         public string ZipCode { get; set; }
         public string City { get; set; }
-        public int PhoneNumber { get; set; }
-        public int SecondaryPhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
+        public string SecondaryPhoneNumber { get; set; }
         public ICollection<Note> Notes { get; set; }
 
     }
